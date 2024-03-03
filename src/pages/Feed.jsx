@@ -6,17 +6,20 @@ const Feed = () => {
     const { data: posts, isLoading, isError, error } = useGetPostsQuery(); //* Returns an object
 
     if (isLoading) {
-        return <p className="text-center my-auto text-8xl text-zinc-800">Loading...</p>
+        return <p className="text-center my-auto text-8xl text-zinc-300">Loading...</p>
     }
 
-    console.log('posts', posts);
+    if(!isLoading && isError) {
+        return <p className="text-8xl text-zinc-300">Something went wrong!</p>
+    }
+
     console.log('iserror', isError);
     console.log('error', error);
 
     return (
-        <div className="bg-zinc-300">
-            <h1 className="text-center text-5xl">Feed</h1>
-            <div className="flex flex-col gap-3 justify-center items-center">
+        <div>
+            <h1 className="text-center text-5xl my-6">Feed</h1>
+            <div className="flex flex-col gap-3">
                 {posts?.map((post) => <PostCard key={post.id} post={post}></PostCard>)}
             </div>
         </div>
