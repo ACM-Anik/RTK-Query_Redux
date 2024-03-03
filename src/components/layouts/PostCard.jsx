@@ -1,12 +1,13 @@
-const PostCard = (post) => {
-    const { userId, id, title, body } = post.post;
+const PostCard = ({post}) => {
+    // const {userId, id, title, body} = post;
+    // console.log(post);
 
     return (
-        <div className="bg-zinc-700 rounded-lg p-6 mx-10">
-            <p className="text-xl">UserId: {userId}</p>
-            <p className="text-xl">Id: {id}</p>
-            <p className="text-xl">Title: {title}</p>
-            <p className="">Body: {body}</p>
+        <div className="bg-zinc-800 rounded-lg p-10 mx-10">
+            <p className="text-xl">UserId: {post?.userId}</p>
+            <p className="text-xl">Id: {post?.id}</p>
+            <h2 className="text-xl">{post?.title}</h2>
+            <p className="">Body: {post?.body}</p>
         </div>
     )
 }
