@@ -1,9 +1,11 @@
+import Feed from "./pages/Feed"
 
 function App() {
 
   return (
     <div>
-      <h1>App</h1>
+      <h1 className="text-center text-2xl">App</h1>
+      <Feed></Feed>
     </div>
   )
 }
