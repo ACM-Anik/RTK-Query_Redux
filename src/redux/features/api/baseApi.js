@@ -12,10 +12,13 @@ const baseApi = createApi({
         }),
         getUsers: builder.query({
             query: () => '/users',
+        }), 
+        getPostById: builder.query({ 
+            query: (id) => `/posts/${id}`,// Only one parameter can send like (id). So best to send an object
         })
     }),
 });
 
-export const { useGetPostsQuery } = baseApi;
+export const { useGetPostsQuery, useGetPostByIdQuery } = baseApi;
 
 export default baseApi;
