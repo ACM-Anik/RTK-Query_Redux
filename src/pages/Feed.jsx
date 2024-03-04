@@ -1,6 +1,6 @@
+import { useForm } from "react-hook-form";
 import PostCard from "../components/layouts/PostCard";
 import { useGetPostByIdQuery, useGetPostsQuery } from "../redux/features/api/baseApi";
-import { useForm } from "react-hook-form";
 
 const Feed = () => {
 
@@ -8,44 +8,34 @@ const Feed = () => {
 
     const { data: post, isLoading, isError, error } = useGetPostByIdQuery(1);
 
-    if (isLoading) {
-        return <p className="text-center my-auto text-8xl text-zinc-300">Loading...</p>
-    }
-
-    if (!isLoading && isError) {
-        return <p className="text-8xl text-zinc-300">Something went wrong!</p>
-    }
-
-    // console.log('iserror', isError);
-    // console.log('error', error);
-
-    const {
-        register,
-        handleSubmit,
-        // formState: { errors },
-    } = useForm();
+    const { register, handleSubmit } = useForm();
 
     const onSubmit = (data) => {
         console.log(data);
-    }
+    };
+
+    if (isLoading) {
+        return <p className="text-center m-auto text-8xl text-zinc-300">Loading...</p>
+    };
+
+    if (!isLoading && isError) {
+        return <p className="text-center m-auto text-8xl text-zinc-300">Something went wrong!</p>
+    };
 
 
     return (
         <div>
             <h1 className="text-center text-5xl my-6">Feed</h1>
             <div className="flex flex-col gap-3">
+                <form className="flex gap-3 m-10" onSubmit={handleSubmit(onSubmit)}>
+
+                    <input className="w-full text-zinc-300 bg-zinc-800 rounded-md" type="text" {...register("post", { required: true })} />
+
+                    <button type="submit" className="bg-zinc-800 text-lg p-3 border border-zinc-300 rounded-md">Post</button>
+                </form>
+
                 {/* {posts?.map((post) => <PostCard key={post.id} post={post}></PostCard>)} */}
                 <PostCard key={post.id} post={post}></PostCard>
-
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    {/* <input className="" defaultValue="test" {...register("example")} /> */}
-
-                    <input className="" {...register("exampleRequired", { required: true })} />
-
-                    {/* {errors.exampleRequired && <span>This field is required</span>} */}
-
-                    <input type="submit" />
-                </form>
             </div>
         </div>
     )
