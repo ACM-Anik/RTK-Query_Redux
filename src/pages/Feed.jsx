@@ -1,18 +1,22 @@
 import { useForm } from "react-hook-form";
 import PostCard from "../components/layouts/PostCard";
-import { useGetPostByIdQuery, useGetPostsQuery } from "../redux/features/api/baseApi";
+import { useGetPostByIdQuery, useGetPostsQuery, useSetPostMutation } from "../redux/features/api/baseApi";
 
 const Feed = () => {
+    const { register, handleSubmit } = useForm();
 
     // const { data: posts, isLoading, isError, error } = useGetPostsQuery(); //* Returns an object
 
     const { data: post, isLoading, isError, error } = useGetPostByIdQuery(1);
 
-    const { register, handleSubmit } = useForm();
+    const [setPost, {data: postData}] = useSetPostMutation(); // Array-->[function, object] returned by mutation
+
 
     const onSubmit = (data) => {
-        console.log(data);
+        setPost(data);
     };
+
+    console.log(postData);
 
     if (isLoading) {
         return <p className="text-center m-auto text-8xl text-zinc-300">Loading...</p>
