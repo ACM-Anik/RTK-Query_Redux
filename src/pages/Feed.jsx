@@ -13,7 +13,8 @@ const Feed = () => {
 
 
     const onSubmit = (data) => {
-        setPost(data);
+        // setPost(data); // Can send simple or multiple by object
+        setPost({ title: 'This is title', body: data.post, userId: 7043 });
     };
 
     console.log(postData);
